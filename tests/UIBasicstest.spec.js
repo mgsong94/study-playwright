@@ -6,8 +6,33 @@ test('Browser Playwright test', async ({browser}) => {
   const context = await browser.newContext(); 
   // 테스트가 수행될 실제 페이지
   const page = await context.newPage();
+
+  // locator
+  const username = page.locator('#username');
+  const signIn = page.locator("#signInBtn");
+  const cardTitles = page.locator(".card-body a");
+
+  // go login page
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
   console.log(await page.title());
+
+  // input wrong username
+  await username.fill("rahulshetty"); // wrong username
+  await page.locator("[type='password']").fill("learning");
+  await signIn.click();
+  console.log(await page.locator("[style*='block']").textContent()); // 최대 30초까지 기다린다. playwright 설정에 따라
+
+  await expect(page.locator("[style*='block']")).toContainText('Incorrect');
+
+  // input correct username
+  await username.fill(""); 
+  await username.fill("rahulshettyacademy");
+  await signIn.click();
+
+  // console.log(await cardTitles.first().textContent());
+  // console.log(await cardTitles.nth(0).textContent());
+  // allTextContents의 경우에는 리턴 값이 배열이므로, 모든 요소들이 attached 될 때까지 기다리지 않아 fail도 되지 않는다.
+  console.log(await cardTitles.allTextContents()); 
 });
 
 test('Page playwright test', async ({ page }) => {
@@ -22,5 +47,23 @@ test('Page playwright test', async ({ page }) => {
 npx playwright 의미 : node module의 playwright 실행 파일 경로를 찾음.
 test.only : 해당 테스트만 실행
 --headed : headless 모드
+*/
+
+/* How to write locator
+
+If Id is present
+css -> tagname#id (or) #id
+
+If class attribute is present
+css -> tagname.class (or) .class
+
+Write css based on any Attribute
+css -> [attribute='value']
+
+Write css with traversing from parent to child
+css -> parenttagname >> childtagname
+
+If needs to write the locator based on text
+text=''
 */
 
