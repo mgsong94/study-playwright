@@ -43,6 +43,66 @@ test('Page playwright test', async ({ page }) => {
   await expect(page).toHaveTitle("Google");
 })
 
+test('UI Controlls', async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+  
+  const radioButtons = page.locator(".radiotextsty"); 
+  const termsCheckBox = page.locator("#terms");
+  const dropdown = page.locator("select.form-control");
+  const documentLink = page.locator("[href*='documents-request']"); // attribute 값을 포함여부로 검색할 때 *을 붙임
+
+  // Assert radio button
+  const userRadioButton = radioButtons.last();
+  await userRadioButton.click();
+  await page.locator("#okayBtn").click();
+
+  console.log(await userRadioButton.isChecked());
+  await expect(userRadioButton).toBeChecked();
+
+  // Assert terms and conditions check box
+  await termsCheckBox.check();
+  await expect(termsCheckBox).toBeChecked();
+
+  await termsCheckBox.uncheck();
+  expect(await termsCheckBox.isChecked()).toBeFalsy();
+
+  // dropdown
+  await dropdown.selectOption("consult");
+  
+  // Assert attribute
+  await expect(documentLink).toHaveAttribute("class", "blinkingText");
+
+  // await page.pause(); // playwright inspector가 호출됨.
+  // await은 실질적인 action이 실행되는 범위에 작성한다.(click, check, tobe..., is...)
+})
+
+
+test('Child page handling', async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+  const documentLink = page.locator("[href*='documents-request']");
+
+  // 아래 두가지 action은 병렬적으로 모두 이뤄져야 하므로, Promise.all을 사용한다.
+  // 반환값은 반환이 되는 값만 가져옴
+  const [childPage] = await Promise.all([
+    //listen for any new page pending,rejected,fulfilled
+    context.waitForEvent('page'), // 새 페이지를 가져오기 위해선 context 파라미터를 사용해야함.
+    documentLink.click()
+  ]);
+
+  // child page
+  // child page에서 로그인에 필요한 도메인 텍스트를 가져옴.
+  const text = await childPage.locator(".red").textContent();
+  const domain = text.split("@")[1].split(" ")[0];
+  console.log(domain);
+
+  // parent page
+  await page.locator("#username").fill(domain);
+})
+
+
 /* 
 npx playwright 의미 : node module의 playwright 실행 파일 경로를 찾음.
 test.only : 해당 테스트만 실행
