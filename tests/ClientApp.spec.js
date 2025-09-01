@@ -1,12 +1,13 @@
 const {test, expect} = require('@playwright/test');
 
 test('Client App login', async ({ page }) => {
+  // login
   await page.goto("https://rahulshettyacademy.com/client");
   await page.locator("#userEmail").fill("tysong0904@gmail.com");
   await page.locator("#userPassword").fill("Mingi!94");
   await page.locator("[value='Login']").click();
-
-  // dashboard
+  
+  /* dashboard */
   // allTextContents 메소드는 auto wait 기능이 없으므로, 요소가 state 될때까지 기다려야 한다.
   
   // 이를 위한 2가지 방법
@@ -14,10 +15,47 @@ test('Client App login', async ({ page }) => {
   await page.waitForLoadState('networkidle'); 
   
   // 방법 2 : 해당 요소가 업 되었음을 체크
-  // await page.locator(".card-body b").first().waitFor(); 
-  
+  await page.locator(".card-body b").first().waitFor(); 
+  /************ */
+
+  // get products titles
   const titles = await page.locator(".card-body b").allTextContents();
   console.log(titles);
+
+  // add to cart
+  const products = page.locator(".card-body");
+  const productName = "ZARA COAT 3";
+
+  const count = await products.count();
+  for (let i = 0; i < count; i++) {
+    if(await products.nth(i).locator("b").textContent() === productName) {
+      await products.nth(i).locator("text= Add To Cart").click(); 
+    }
+  }
+
+  const cartBtn = page.locator("[routerlink='/dashboard/cart']");
+  await cartBtn.click();
+
+  // cart page
+  await page.locator("div li").first().waitFor(); // 요소들이 모두 로딩될 때까지 기다림
+  const product = page.locator("h3:has-text('ZARA COAT 3')");
+  const bool = await product.isVisible();
+  expect(bool).toBeTruthy();
+
+  await page.locator("text=Checkout").click();
+
+  // Checkout
+  await page.locator("[placeholder*='Country']").pressSequentially("korea", { delay: 150});
+
+  const dropdown = page.locator("section.ta-results");
+  await dropdown.waitFor();
+  const optionsCount = await dropdown.locator("button").count();
+  for (let i = 0; i < optionsCount; i++) {
+    const text = await dropdown.locator("button").nth(i).textContent();
+    if (text === " Korea, Republic of") {
+      await dropdown.locator("button").nth(i).click();
+    }
+  }
 });
 
 
