@@ -44,9 +44,10 @@ test('Client App login', async ({ page }) => {
 
   await page.locator("text=Checkout").click();
 
-  // Checkout
+  /* Checkout Page */
   await page.locator("[placeholder*='Country']").pressSequentially("korea", { delay: 150});
 
+  // select dropdown option
   const dropdown = page.locator("section.ta-results");
   await dropdown.waitFor();
   const optionsCount = await dropdown.locator("button").count();
@@ -56,6 +57,46 @@ test('Client App login', async ({ page }) => {
       await dropdown.locator("button").nth(i).click();
     }
   }
+
+  // fill cvs code, name
+  await page.locator(".field.small >> .input.txt").first().fill("123");
+  await page.locator(".field .input.txt").nth(2).fill("Ignim");
+
+  // check email address
+  const label = page.locator(".user__name label");
+  await expect(label).toHaveText("tysong0904@gmail.com");
+
+  // place order
+  await page.locator(".action__submit").click();
+
+  /* Thanks Page */
+  await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
+  const orderText = await page.locator("label.ng-star-inserted").textContent();
+  console.log(orderText);
+
+  // click orders
+  const ordersBtn = page.locator("button[routerlink*='myorders']");
+  await ordersBtn.click();
+
+  /* Orders Page*/
+  await page.locator("tbody").waitFor();
+  const rows = page.locator("tbody tr");
+  let isOrdered = false;
+  for (let i = 0; i < await rows.count(); i++) {
+    const orderId = await rows.nth(i).locator("th").textContent();
+    if (orderText.includes(orderId)) {
+      console.log("Order Success!");
+      isOrdered = true;
+
+      await rows.nth(i).locator(".btn-primary:has-text('View')").click();
+      break;
+    }
+  }
+  expect(isOrdered).toBeTruthy();
+
+  /* Order Detail Page */
+  const orderIdDetail = await page.locator("div.col-text").textContent();
+  expect(orderText).toContain(orderIdDetail);
 });
 
 
