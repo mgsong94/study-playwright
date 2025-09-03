@@ -7,7 +7,7 @@ If class attribute is present
 css -> tagname.class (or) .class
 
 Write css based on any Attribute
-css -> [attribute='value']
+css -> tagname[attribute='value'] (or) [attribute='value']
 
 Write css with traversing from parent to child
 css -> parenttagname >> childtagname
@@ -17,3 +17,11 @@ text=''
 
 css and text
 tagname:has-text('')
+
+// filter
+locator에서 해당하는 조건에 맞게 요소를 필터링함
+
+
+// 테스트 실행 방법
+npx playwright test --ui
+

@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 
-test('Client App login', async ({ page }) => {
+test('Lets Shop Web', async ({ page }) => {
   // login
   await page.goto("https://rahulshettyacademy.com/client");
   await page.locator("#userEmail").fill("tysong0904@gmail.com");
