@@ -1,5 +1,7 @@
 How to write locator
 
+1. CSS
+
 If Id is present
 css -> tagname#id (or) #id
 
@@ -18,10 +20,15 @@ text=''
 css and text
 tagname:has-text('')
 
+2. Xpath
+
+
+3. GetBy 
+GetByRole, GetByLabel, GetByText ...
+*GetByLabel이 항상 동작하지 않는 이유 : label과 input간 관계가 있어야 한다. 
+<label> <input> </label> 의 구조이거나, 
+<label></label> 의 속성이 <input> 의 속성과 겹치는 부분이 있어야 함.
+
+
 // filter
 locator에서 해당하는 조건에 맞게 요소를 필터링함
-
-
-// 테스트 실행 방법
-npx playwright test --ui
-

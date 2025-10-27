@@ -102,28 +102,3 @@ test('Child page handling', async ({ browser }) => {
   await page.locator("#username").fill(domain);
 })
 
-
-/* 
-npx playwright 의미 : node module의 playwright 실행 파일 경로를 찾음.
-test.only : 해당 테스트만 실행
---headed : headless 모드
-*/
-
-/* How to write locator
-
-If Id is present
-css -> tagname#id (or) #id
-
-If class attribute is present
-css -> tagname.class (or) .class
-
-Write css based on any Attribute
-css -> [attribute='value']
-
-Write css with traversing from parent to child
-css -> parenttagname >> childtagname
-
-If needs to write the locator based on text
-text=''
-*/
-

@@ -1,0 +1,8 @@
+// 테스트 실행 방법
+npx playwright test --ui
+
+/* 
+npx playwright 의미 : node module의 playwright 실행 파일 경로를 찾음.
+test.only : 해당 테스트만 실행
+--headed : headless 모드
+*/
