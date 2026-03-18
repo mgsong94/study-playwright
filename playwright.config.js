@@ -24,6 +24,7 @@ const config = ({
     headless: false,
     screenshot: 'on',
     trace: 'retain-on-failure' // off, on, retry-on-first?
+    // trace 를 통해서 api request, response 확인 가능.
   },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',

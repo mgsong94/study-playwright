@@ -1,0 +1,14 @@
+테스트에서 로그인 단계를 생략하는 방법
+1. API로 로그인
+2. login 후 세션/스토리지 정보를 저장 후 브라우저에 주입.
+ - 해당 코드
+  await context.storageState({path: 'state.json'});
+  webContext = await browser.newContext({storageState: 'state.json'});
+
+VSCode를 이용한 디버깅 방법
+1. package.json 에 다음 작성
+ "scripts": {
+    "test": "npx playwright test tests/7.WebAPIPart1.spec.js --headed"
+  },
+2. 브레이크 포인트 설정
+3. Ctrl + Shift + P -> debug npm script 실행
