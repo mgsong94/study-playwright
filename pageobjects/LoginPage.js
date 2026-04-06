@@ -12,8 +12,8 @@ class LoginPage {
   }
   
   async validLogin(username, password) {
-    await this.userName.fill("tysong0904@gmail.com");
-    await this.password.fill("Mingi!94");
+    await this.userName.fill(username);
+    await this.password.fill(password);
     await this.loginButton.click();
     // 이를 위한 2가지 방법
     // 방법 1 : 브라우저에서 요소를 업로드하기 위한 network 통신이 끝나고 idle 상태임을 체크
