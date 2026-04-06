@@ -1,6 +1,7 @@
 const {test, expect} = require('@playwright/test');
 const {LoginPage} = require('../pageobjects/LoginPage');
 const {DashboardPage} = require('../pageobjects/DashboardPage');
+<<<<<<< HEAD
 const dataset = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
 
 test('Lets Shop Web', async ({ page }) => {
@@ -8,6 +9,19 @@ test('Lets Shop Web', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
   await loginPage.validLogin(dataset.username, dataset.password);
+=======
+
+test('Lets Shop Web', async ({ page }) => {
+  // needed datas
+  const username = "tysong0904@gmail.com";
+  const password = "Mingi!94";
+  const productName = "ZARA COAT 3";
+
+  /* Login Page */
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.validLogin(username, password);
+>>>>>>> 80bcad2e9cdd1e223bd8e91a87d488e8b4ea407e
   
   /* Dashboard Page */
   // allTextContents 메소드는 auto wait 기능이 없으므로, 요소가 state 될때까지 기다려야 한다.
@@ -18,7 +32,11 @@ test('Lets Shop Web', async ({ page }) => {
   
 
   // add to cart and go to cart
+<<<<<<< HEAD
   await dashboardPage.addProduct(dataset.productName);
+=======
+  await dashboardPage.addProduct(productName);
+>>>>>>> 80bcad2e9cdd1e223bd8e91a87d488e8b4ea407e
   await dashboardPage.navigateToCart();
 
   /* cart */ 
