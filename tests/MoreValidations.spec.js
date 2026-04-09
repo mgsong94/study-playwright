@@ -12,6 +12,12 @@ test('Popup validations', async({page}) => {
     await page.locator("#confirmbtn").click();
     
     // handle hover
-    await page.pause();
     await page.locator("#mousehover").hover();
+    
+    // handle frame
+    await page.pause();
+    const framePage = page.frameLocator("#courses-iframe");
+    await framePage.locator("li a[href*='lifetime-access']:visible").click();
+    const textCheck = await framePage.locator(".text h2").textContent();
+    console.log(textCheck.split(" ")[1]);
 });
