@@ -6,6 +6,7 @@ class DashboardPage {
   }
 
   async addProduct(productName) {
+    // allTextContents 메소드는 auto wait 기능이 없으므로, 요소가 state 될때까지 기다려야 한다.
     // log titles
     const titles = await this.productsText.allTextContents();
     console.log(titles);
