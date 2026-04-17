@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-import { trace } from 'console';
 
 /**
  * Read environment variables from file.
@@ -13,7 +12,7 @@ import { trace } from 'console';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = ({
+export default defineConfig({
   testDir: './tests',
   timeout: 30 * 1000,
   expect: {
@@ -29,6 +28,4 @@ const config = ({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
 });
-
-module.exports = config
 
