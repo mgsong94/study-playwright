@@ -1,0 +1,7 @@
+테스트를 특정 설정을 통하여 수행하고 싶을 때 : --config [설정파일명]
+테스트를 특정 프로젝트 설정으로 수행하고 싶을 때 : --project [프로젝트명]
+*프로젝트는 설정파일 내에 작성이 되어있어야 한다.
+*한 설정파일에 여러 프로젝트가 있을 경우, 그냥 실행하면 여러 프로젝트 설정으로 테스트가 실행됨.
+
+ex)
+npx playwright test ./tests/3.ClientAppPO.spec.js --config playwright.config1.mjs --project=safari
