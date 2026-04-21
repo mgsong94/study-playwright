@@ -48,7 +48,6 @@ test('Check the order', async ({ page }) => {
 
   /* Order Detail Page */
   const orderIdDetail = await page.locator("div.col-text").textContent();
-  await page.pause();
   expect(orderText).toContain(orderIdDetail);
   
 });

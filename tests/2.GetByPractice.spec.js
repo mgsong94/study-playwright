@@ -12,6 +12,4 @@ test('Proto Commerce', async ({ page }) => {
 
   /* Shop Page */
   await page.locator("app-card").filter({hasText: "Nokia Edge"}).getByRole("button").click();
-  await page.pause();
-
 })

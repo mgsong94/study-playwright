@@ -31,7 +31,6 @@ test('Lets Shop Web', async () => {
   // add to cart
   const product1 = page.locator(".card-body").filter({ hasText: "ZARA COAT 3" }).getByRole("button", { name: "Add To Cart"}).click();
 
-  await page.pause();
 
   const cartBtn = page.locator("[routerlink='/dashboard/cart']");
   await cartBtn.click();
@@ -107,8 +106,6 @@ test('Test 2', async () => {
 
   // add to cart
   const product1 = page.locator(".card-body").filter({ hasText: "ZARA COAT 3" }).getByRole("button", { name: "Add To Cart" }).click();
-
-  await page.pause();
 })
 
 
