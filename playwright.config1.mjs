@@ -14,6 +14,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  retries: 5, // retries 옵션을 통해서 flaky test(불안정한 테스트)를 찾아낼 수 있음.
   timeout: 30 * 1000,
   expect: {
     timeout: 5000
@@ -27,7 +28,7 @@ export default defineConfig({
         screenshot: 'on',
         video: 'retain-on-failure',
         trace: 'on', // trace 를 통해서 api request, response 확인 가능.
-        viewport: {width:720, height:720},
+        // viewport: {width:720, height:720},
         // ...devices['Galaxy S24'],
         // ignoreHTTPSErrors: true, // SSL 에러 무시
         // permissions: ['geolocation'] // 위치 권한 허용

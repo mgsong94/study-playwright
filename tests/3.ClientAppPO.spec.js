@@ -87,7 +87,7 @@ for(const data of dataset) {
   });
 }
 
-customtest.only(`Lets Shop Web`, async ({ page, testDataForOrder}) => {
+customtest(`Lets Shop Web`, async ({ page, testDataForOrder}) => {
     /* Login Page */
     const loginPage = new LoginPage(page);
     await loginPage.goto();
