@@ -15,6 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   retries: 5, // retries 옵션을 통해서 flaky test(불안정한 테스트)를 찾아낼 수 있음.
+  workers: 1, // 1로 설정하면 한개의 브라우저만 실행됨
   timeout: 30 * 1000,
   expect: {
     timeout: 5000
