@@ -99,6 +99,8 @@ test('Child page handling', async ({ browser }) => {
   console.log(domain);
 
   // parent page
+  // textContent()와 inputValue()의 차이 : textContent는 Dom에 이미 붙어있는 텍스트를 가져오는 것이고, inputValue는 입력된 텍스트를 가져온다.
   await page.locator("#username").fill(domain);
+  console.log(await page.locator("#username").inputValue());
 })
 

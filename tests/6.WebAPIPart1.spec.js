@@ -18,7 +18,7 @@ test.beforeAll(async() => {
   orderText = await apiUtils.createOrder(orderPayload, token);
 });
 
-test('Check the order', async ({ page }) => {
+test('@API Check the order', async ({ page }) => {
   // 로그인 토큰 값 저장.
   page.addInitScript(value => {
     window.localStorage.setItem('token', value);

@@ -22,7 +22,7 @@ test.beforeAll( async({browser}) => {
   webContext = await browser.newContext({storageState: 'state.json'});
 })
 
-test('Lets Shop Web', async () => {
+test('@API Lets Shop Web', async () => {
   const page = await webContext.newPage();
 
   // navigate
@@ -98,7 +98,7 @@ test('Lets Shop Web', async () => {
   expect(orderText).toContain(orderIdDetail);
 });
 
-test('Test 2', async () => {
+test('@API Test 2', async () => {
   const page = await webContext.newPage();
 
   // navigate

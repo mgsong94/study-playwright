@@ -5,7 +5,7 @@ test('Popup validations', async ({ page }) => {
     // handle hidden
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     await expect(page.locator("#displayed-text")).toBeVisible();
-    await page.locator("#hide-textbox123").click();
+    await page.locator("#hide-textbox").click();
     await expect(page.locator("#displayed-text")).toBeHidden();
 
     // handle popup
