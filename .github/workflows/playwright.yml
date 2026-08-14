@@ -1,5 +1,6 @@
 name: Playwright Tests
 on:
+  workflow_dispatch: # 이 줄이 있어야 버튼이 생깁니다!
   push:
     branches: [ main, master ]
   pull_request:
